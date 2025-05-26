@@ -1,0 +1,15 @@
+.container {
+    padding: 0.2em;
+    text-align: left;
+    margin-top: 0.4em;
+}
+
+.control {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.4em;
+}
+
+.button {
+    padding: 0.4em;
+}
