@@ -1,0 +1,6 @@
+{
+  "builds": [],
+  "outputDirectory": "dist",
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }],
+  "cleanUrls": true
+}
