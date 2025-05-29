@@ -27,7 +27,7 @@ export const MenuBody: React.FC<MenuBodyProps> = ({
                     value={value}
                     onChange={(e) => setValue(e.target.value === '' ? '' : parseInt(e.target.value, 10))}
                     onKeyDown={handleKeyDown}
-                    placeholder="Enter node value"
+                    placeholder="Valor do Nó"
                     className={styles.inputBar}
                 />
                 <span className={styles.buttonGroup}>
@@ -40,7 +40,7 @@ export const MenuBody: React.FC<MenuBodyProps> = ({
                         disabled={value === ''}
                         className={styles.button}
                     >
-                        Insert
+                        Inserir
                     </button>
                     <button
                         type="button"
@@ -51,7 +51,7 @@ export const MenuBody: React.FC<MenuBodyProps> = ({
                         disabled={value === ''}
                         className={styles.button}
                     >
-                        Delete
+                        Deletar
                     </button>
                 </span>
             </div>

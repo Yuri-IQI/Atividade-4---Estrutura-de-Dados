@@ -12,6 +12,13 @@
 
 .button {
     padding: 0.4em;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+    color: #dfdfdf;
+}
+
+.collapseButton {
+    z-index: 999;
 }
 
 .inputBar {
