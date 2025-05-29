@@ -37,8 +37,11 @@ export const InsertionMenu: React.FC<InsertionMenuProps> = ({
                 />
                 <button
                     type="button"
-                    onClick={() => { if (typeof value === 'number') onInsert(value); setValue(''); }}
-                    disabled={!value}
+                    onClick={() => {
+                        if (value !== '') onInsert(value as number);
+                        setValue('');
+                    }}
+                    disabled={value === ''}
                     className={styles.button}
                 >
                     Insert

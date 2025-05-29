@@ -37,11 +37,14 @@ export const DeleteMenu: React.FC<DeleteMenuProps> = ({
                 />
                 <button
                     type="button"
-                    onClick={() => { if (typeof value === 'number') onDelete(value); setValue(''); }}
-                    disabled={!value}
+                    onClick={() => {
+                        if (value !== '') onDelete(value as number);
+                        setValue('');
+                    }}
+                    disabled={value === ''}
                     className={styles.button}
                 >
-                    Remove
+                    Insert
                 </button>
             </div>
         </div>

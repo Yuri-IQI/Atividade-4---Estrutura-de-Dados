@@ -5,7 +5,8 @@ import styles from "../styles/TreeOperationsMenu.module.css";
 import { InsertionMenu } from "./ops/InsertionMenu";
 import { DeleteMenu } from "./ops/DeleteMenu";
 import type { TreeNode } from "../types/TreeNode";
-import { basicNodeInsertion, findNode } from "../services/binaryTreeService";
+import { findNode } from "../services/binaryTreeService";
+import { addNode } from "../services/redBlackTreeService";
 
 interface TreeOperationsMenuProps {
     rootNode: TreeNode | null;
@@ -25,12 +26,19 @@ export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenu
     };
 
     const handleNodeInsertion = (value: number) => {
-        console.log("Inserted value:", value);
-        if (findNode(rootNode, value)) return alert("Node already exists");
+        if (isNaN(value)) {
+            alert("Invalid number");
+            return;
+        }
 
-        const newRoot = basicNodeInsertion(rootNode, value);
-        setRootNode?.(newRoot);
-        console.log(newRoot);
+        const existing = findNode(rootNode, value);
+        if (existing) {
+            alert("Node already exists");
+            return;
+        }
+
+        const newRoot = addNode(rootNode, value);
+        setRootNode?.({...newRoot});
     };
 
     const handleNodeDeletion = (value: number) => {

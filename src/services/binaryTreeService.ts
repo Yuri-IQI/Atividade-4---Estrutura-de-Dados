@@ -1,61 +1,61 @@
+import type { Color } from "../types/enums/Color";
 import type { TreeNode } from "../types/TreeNode";
 
 export const traverseTree = (
-    node: TreeNode | null,
-    callback: (node: TreeNode) => void
+    tree: TreeNode | null,
+    callback: (tree: TreeNode) => void
 ): void => {
-    if (!node) return;
+    if (!tree) return;
     
-    callback(node);
+    callback(tree);
     
-    if (node.left) traverseTree(node.left, callback);
-    if (node.right) traverseTree(node.right, callback);
+    if (tree.left) traverseTree(tree.left, callback);
+    if (tree.right) traverseTree(tree.right, callback);
 };
 
 export const findNode = (
-    node: TreeNode | null,
+    tree: TreeNode | null,
     value: number
 ): TreeNode | null => {
-    if (!node) return null;
+    if (!tree) return null;
     
-    if (node.value === value) return node;
+    if (tree.value === value) return tree;
     
-    return value < node.value
-        ? findNode(node.left, value)
-        : findNode(node.right, value);
+    return value < tree.value
+        ? findNode(tree.left, value)
+        : findNode(tree.right, value);
 }
 
 export const createNode = (
     value: number,
-    parent: TreeNode | null
-): TreeNode => {
-    return {
-        value,
-        left: null,
-        right: null,
-        color: 'RED',
-        parent: parent
-    }
-}
+    parent: TreeNode | null = null,
+    color: Color = 'RED'
+): TreeNode => ({
+    value,
+    left: null,
+    right: null,
+    color,
+    parent
+});
 
-export const basicNodeInsertion = (
-    node: TreeNode | null,
+export const insertNode = (
+    tree: TreeNode | null,
     value: number,
     parent: TreeNode | null = null
 ): TreeNode => {
-    if (!node) return createNode(value, parent);
-
-    if (value < node.value) {
-        return {
-            ...node,
-            left: basicNodeInsertion(node.left, value, node),
-        };
-    } else if (value > node.value) {
-        return {
-            ...node,
-            right: basicNodeInsertion(node.right, value, node),
-        };
-    } else {
-        return node;
+    if (!tree) {
+        return createNode(value, parent);
     }
+
+    if (value < tree.value) {
+        const insertedLeft = insertNode(tree.left, value, tree);
+        tree.left = insertedLeft;
+        insertedLeft.parent = tree;
+    } else if (value > tree.value) {
+        const insertedRight = insertNode(tree.right, value, tree);
+        tree.right = insertedRight;
+        insertedRight.parent = tree;
+    }
+
+    return tree;
 };

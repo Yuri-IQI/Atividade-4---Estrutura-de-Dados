@@ -1,4 +1,4 @@
-import type { Color } from "./enums/RedBlack";
+import type { Color } from "./enums/Color";
 
 export interface TreeNode {
     value: number,
