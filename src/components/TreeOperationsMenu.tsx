@@ -14,7 +14,7 @@ interface TreeOperationsMenuProps {
 }
 
 export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenuProps) => {
-    const tabs = ['Insert', 'Remove'];
+    const tabs = ['Insert', 'Delete'];
     const [currentTab, setCurrentTab] = useState(tabs[0]);
     const nodeRef = useRef<HTMLDivElement>(null);
     
@@ -60,7 +60,7 @@ export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenu
 
                 <div className={styles.body}>
                     {currentTab === 'Insert' && <InsertionMenu onInsert={handleNodeInsertion} />}
-                    {currentTab === 'Remove' && <DeleteMenu onDelete={handleNodeDeletion} />}
+                    {currentTab === 'Delete' && <DeleteMenu onDelete={handleNodeDeletion} />}
                 </div>
             </div>
         </Draggable>

@@ -44,7 +44,7 @@ export const DeleteMenu: React.FC<DeleteMenuProps> = ({
                     disabled={value === ''}
                     className={styles.button}
                 >
-                    Insert
+                    Delete
                 </button>
             </div>
         </div>
