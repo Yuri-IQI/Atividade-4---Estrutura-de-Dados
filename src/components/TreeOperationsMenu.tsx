@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import Draggable from "react-draggable";
 import { OpsHeaderButton } from "./ops/OpsHeaderButton";
 import styles from "../styles/TreeOperationsMenu.module.css";
@@ -17,7 +17,23 @@ export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenu
     const tabs = ['Insert', 'Delete'];
     const [currentTab, setCurrentTab] = useState(tabs[0]);
     const nodeRef = useRef<HTMLDivElement>(null);
+    const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
     
+    useEffect(() => {
+        const handleResize = () => {
+            setBounds({
+                left: 0,
+                top: 0,
+                right: window.innerWidth - (document.getElementById('ops-menu')?.getBoundingClientRect().width ?? 0),
+                bottom: window.innerHeight - (document.getElementById('ops-menu')?.getBoundingClientRect().height ?? 0)
+            });
+        };
+
+        handleResize();
+        window.addEventListener("resize", handleResize);
+        return () => window.removeEventListener("resize", handleResize);
+    }, []);
+
     const handleTabSelection = (tab: string) => {
         if (tab !== currentTab) {
             setCurrentTab(tab);
@@ -46,8 +62,8 @@ export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenu
     };
 
     return (
-        <Draggable handle={`.${styles.header}`} nodeRef={nodeRef as React.RefObject<HTMLElement>}>
-            <div className={styles.container} ref={nodeRef}>
+        <Draggable handle={`.${styles.header}`} nodeRef={nodeRef as React.RefObject<HTMLElement>} bounds={bounds}>
+            <div id="ops-menu" className={styles.container} ref={nodeRef}>
                 <div className={styles.header}>
                     {tabs.map((tab) => (
                         <span key={tab}>

@@ -37,7 +37,7 @@ export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) =>
       return children.length ? children : null;
     });
 
-    const treeLayout = d3.tree<TreeNode>().size([dimensions.width - 200, dimensions.height - 200]);
+    const treeLayout = d3.tree<TreeNode>().size([dimensions.width - 100, dimensions.height - 100]);
     const treeData = treeLayout(hierarchyData);
 
     const spacing = 100;
@@ -50,8 +50,8 @@ export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) =>
 
     setLinks(treeData.links());
     setNodes(treeData.descendants().map(d => ({
-      x: d.x + 100,
-      y: d.y + 100,
+      x: d.x + 50,
+      y: d.y + 50,
       data: d.data,
     })));
   }, [root, dimensions]);
@@ -68,10 +68,10 @@ export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) =>
           {links.map((link, i) => (
             <line
               key={i}
-              x1={link.source.x + 100}
-              y1={link.source.y + 100}
-              x2={link.target.x + 100}
-              y2={link.target.y + 100}
+              x1={link.source.x + 50}
+              y1={link.source.y + 50}
+              x2={link.target.x + 50}
+              y2={link.target.y + 50}
               stroke="#999"
               strokeWidth={2}
             />
