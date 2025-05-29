@@ -18,7 +18,6 @@
     cursor: move;
     background-color: #2e2e2e;
     border-radius: 6px;
-    justify-content: space-evenly;
 }
 
 .header span {
@@ -32,4 +31,14 @@
     background-color: #6d6862;
     color: #e8dfd4;
     cursor: pointer;
+}
+
+.collapseButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

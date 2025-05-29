@@ -7,9 +7,31 @@
 .control {
     display: flex;
     justify-content: space-between;
-    margin-top: .1em;
+    gap: 1em;
 }
 
 .button {
     padding: 0.4em;
+}
+
+.inputBar {
+    -moz-appearance: textfield;
+    -webkit-appearance: textfield;
+    appearance: textfield;
+    padding: 0.4em 0.6em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #dfdfdf;
+    outline: none;
+    transition: border-color 0.2s ease-in-out;
+}
+
+.inputBar:focus {
+    border-color: #666;
+}
+
+.buttonGroup {
+    display: flex;
+    gap: .4em;
 }
