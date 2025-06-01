@@ -28,7 +28,11 @@ export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) =>
   }, []);
 
   useEffect(() => {
-    if (!root) return;
+    if (!root) {
+      setLinks([]);
+      setNodes([]);
+      return;
+    }
 
     const hierarchyData = d3.hierarchy<TreeNode>(root, node => {
       const children: TreeNode[] = [];

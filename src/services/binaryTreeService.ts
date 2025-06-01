@@ -4,27 +4,16 @@ import type { TreeNode } from "../types/TreeNode";
 export const traverseTree = (
     tree: TreeNode | null,
     callback: (tree: TreeNode) => void
-): void => {
-    if (!tree) return;
+): TreeNode => {
+    if (!tree) throw console.error('No tree to be traversed');
     
     callback(tree);
     
     if (tree.left) traverseTree(tree.left, callback);
     if (tree.right) traverseTree(tree.right, callback);
-};
 
-export const findNode = (
-    tree: TreeNode | null,
-    value: number
-): TreeNode | null => {
-    if (!tree) return null;
-    
-    if (tree.value === value) return tree;
-    
-    return value < tree.value
-        ? findNode(tree.left, value)
-        : findNode(tree.right, value);
-}
+    return tree;
+};
 
 export const createNode = (
     value: number,
@@ -58,4 +47,23 @@ export const insertNode = (
     }
 
     return tree;
+};
+
+export const findRoot = (node: TreeNode): TreeNode => {
+    if (node.parent) return findRoot(node.parent);
+    return node;
+};
+
+export const findMax = (node: TreeNode): TreeNode =>
+    node.right ? findMax(node.right) : node;
+
+export const findNode = (
+    tree: TreeNode | null,
+    value: number
+): TreeNode | null => {
+    if (!tree) return null;
+    if (tree.value === value) return tree;
+    return value < tree.value
+        ? findNode(tree.left, value)
+        : findNode(tree.right, value);
 };
