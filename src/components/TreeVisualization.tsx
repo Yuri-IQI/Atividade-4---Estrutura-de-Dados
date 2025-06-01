@@ -5,6 +5,7 @@ import { NodeRepresentation } from './representations/NodeRepresentation';
 
 type TreeVisualizationProps = {
   root: TreeNode | null;
+  selectNode: (selectedNode: TreeNode) => void;
 };
 
 type PositionedNode = {
@@ -13,11 +14,19 @@ type PositionedNode = {
   data: TreeNode;
 };
 
-export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) => {
+export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root, selectNode }) => {
   const svgRef = useRef<SVGSVGElement | null>(null);
   const [dimensions, setDimensions] = useState({ width: window.innerWidth, height: window.innerHeight });
   const [nodes, setNodes] = useState<PositionedNode[]>([]);
   const [links, setLinks] = useState<d3.HierarchyPointLink<TreeNode>[]>([]);
+  const [currentlySelectedNode, setcurrentlySelectedNode] = useState<TreeNode | null>(null);
+
+  const handleNodeSelection = (selectedNode: TreeNode) => {
+    if (currentlySelectedNode === selectedNode) setcurrentlySelectedNode(null);
+
+    setcurrentlySelectedNode(selectedNode)
+    selectNode(selectedNode);
+  }
 
   useEffect(() => {
     const handleResize = () => {
@@ -83,7 +92,7 @@ export const TreeVisualization: React.FC<TreeVisualizationProps> = ({ root }) =>
         </g>
       </svg>
       {nodes.map((node, i) => (
-        <NodeRepresentation key={i} node={node.data} x={node.x} y={node.y} />
+        <NodeRepresentation key={i} node={node.data} x={node.x} y={node.y} selectNode={handleNodeSelection} />
       ))}
     </div>
   );

@@ -1,14 +1,17 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styles from "../../styles/OpsBody.module.css";
+import type { TreeNode } from "../../types/TreeNode";
 
 interface MenuBodyProps {
     onInsert: (value: number) => void;
     onDelete: (value: number) => void;
+    selectedNode: TreeNode | null;
 }
 
 export const MenuBody: React.FC<MenuBodyProps> = ({
   onInsert,
-  onDelete
+  onDelete,
+  selectedNode
 }) => {
     const [value, setValue] = useState<number | ''>('');
     const handleKeyDown = (e: React.KeyboardEvent) => {
@@ -17,6 +20,12 @@ export const MenuBody: React.FC<MenuBodyProps> = ({
             setValue('');
         }
     };
+
+    useEffect(() => {
+    if (selectedNode) {
+        setValue(selectedNode.value);
+    }
+    }, [selectedNode]);
 
     return (
         <div className={styles.container}>

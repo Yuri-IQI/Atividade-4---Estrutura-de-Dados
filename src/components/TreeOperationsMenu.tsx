@@ -10,9 +10,10 @@ import { MenuBody } from "./ops/MenuBody";
 interface TreeOperationsMenuProps {
   rootNode: TreeNode | null;
   setRootNode?: (node: TreeNode | null) => void;
+  selectedNode: TreeNode | null;
 }
 
-export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenuProps) => {
+export const TreeOperationsMenu = ({ rootNode, selectedNode, setRootNode }: TreeOperationsMenuProps) => {
   const nodeRef = useRef<HTMLDivElement>(null);
   const [bounds, setBounds] = useState({ left: 0, top: 0, right: window.innerWidth, bottom: window.innerHeight });
   const [isCollapsed, setIsCollapsed] = useState(false);
@@ -85,7 +86,7 @@ export const TreeOperationsMenu = ({ rootNode, setRootNode }: TreeOperationsMenu
 
         {!isCollapsed && (
           <div className={styles.body}>
-            <MenuBody onDelete={handleNodeDeletion} onInsert={handleNodeInsertion} />
+            <MenuBody selectedNode={selectedNode} onDelete={handleNodeDeletion} onInsert={handleNodeInsertion} />
           </div>
         )}
       </div>

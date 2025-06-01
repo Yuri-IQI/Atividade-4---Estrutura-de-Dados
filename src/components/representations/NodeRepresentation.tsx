@@ -6,12 +6,19 @@ type NodeRepresentationProps = {
   node: TreeNode;
   x: number;
   y: number;
+  selectNode: (value: TreeNode) => void;
 };
 
-export const NodeRepresentation: React.FC<NodeRepresentationProps> = ({ node, x, y }) => {
+export const NodeRepresentation: React.FC<NodeRepresentationProps> = ({ node, x, y, selectNode }) => {
+  const handleNodeClick = () => {
+    selectNode(node);
+  }
+
   return (
     <div
+      onClick={handleNodeClick}
       style={{
+        cursor: 'pointer',
         position: 'absolute',
         left: x,
         top: y,
@@ -29,7 +36,7 @@ export const NodeRepresentation: React.FC<NodeRepresentationProps> = ({ node, x,
         border: '2px solid #aeaeae'
       }}
     >
-      {node.value}
+      <h3>{node.value}</h3>
     </div>
   );
 };

@@ -6,11 +6,16 @@ import { TreeVisualization } from './components/TreeVisualization';
 
 function App() {
   const [rootNode, setRootNode] = useState<TreeNode | null>(null);
+  const [selectedNode, setSelectedNode] = useState<TreeNode | null>(null);
+
+  const handleNodeSelection = (node: TreeNode) => {
+    setSelectedNode(node);
+  };
 
   return (
     <>
-      <TreeOperationsMenu rootNode={rootNode} setRootNode={setRootNode} />
-      <TreeVisualization root={rootNode} />
+      <TreeOperationsMenu rootNode={rootNode} setRootNode={setRootNode} selectedNode={selectedNode} />
+      <TreeVisualization root={rootNode} selectNode={handleNodeSelection} />
     </>
   )
 }
